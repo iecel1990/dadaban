@@ -7,16 +7,16 @@ public enum StatusEnum {
     valid(1, "有效"),
     invalid(0, "无效");
 
-    private int code;
+    private Integer code;
 
     private String desc;
 
-    StatusEnum(int code, String desc) {
+    StatusEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 

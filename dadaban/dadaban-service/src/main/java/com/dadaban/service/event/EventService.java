@@ -9,17 +9,13 @@ import com.dadaban.enums.StatusEnum;
 import com.dadaban.repository.dao.EventMapper;
 import com.dadaban.repository.model.Event;
 import com.dadaban.repository.model.EventExample;
-import com.dadaban.repository.util.*;
-import com.dadaban.utils.ObjectUtil;
-import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
+import com.dadaban.repository.util.CriteriaUtil;
+import com.dadaban.repository.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
 
@@ -36,13 +32,10 @@ public class EventService {
     public Page<Event> findAll(Page<Event> page, Map<String, Object> searchParams) {
 
         EventExample example = new EventExample();
-        example.setPage(page);
-
         EventExample countExample = new EventExample();
-        countExample.createCriteria().andStatusEqualTo(StatusEnum.valid.getCode());
 
         try {
-            CriteriaUtil.buildCriteria(example, countExample, searchParams);
+            CriteriaUtil.buildCriteria(example, countExample, searchParams, page);
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

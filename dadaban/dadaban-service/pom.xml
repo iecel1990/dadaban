@@ -18,5 +18,10 @@
       <artifactId>dadaban-persist</artifactId>
       <version>${project.version}</version>
     </dependency>
+      <dependency>
+          <groupId>com.dadaban</groupId>
+          <artifactId>dadaban-domain</artifactId>
+          <version>${project.version}</version>
+      </dependency>
   </dependencies>
 </project>

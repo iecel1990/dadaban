@@ -30,3 +30,6 @@ target/
 */out/
 */.DS_Store
 */rebel.xml
+dadaban/dadaban-persist/src/main/resources/rebel.xml
+dadaban/dadaban-service/src/main/resources/rebel.xml
+dadaban/dadaban-web/src/main/resources/

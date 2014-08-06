@@ -497,63 +497,63 @@ public class TicketExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIsNull() {
-            addCriterion("order is null");
+        public Criteria andSeqIsNull() {
+            addCriterion("seq is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIsNotNull() {
-            addCriterion("order is not null");
+        public Criteria andSeqIsNotNull() {
+            addCriterion("seq is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderEqualTo(Integer value) {
-            addCriterion("order =", value, "order");
+        public Criteria andSeqEqualTo(Integer value) {
+            addCriterion("seq =", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotEqualTo(Integer value) {
-            addCriterion("order <>", value, "order");
+        public Criteria andSeqNotEqualTo(Integer value) {
+            addCriterion("seq <>", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderGreaterThan(Integer value) {
-            addCriterion("order >", value, "order");
+        public Criteria andSeqGreaterThan(Integer value) {
+            addCriterion("seq >", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order >=", value, "order");
+        public Criteria andSeqGreaterThanOrEqualTo(Integer value) {
+            addCriterion("seq >=", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderLessThan(Integer value) {
-            addCriterion("order <", value, "order");
+        public Criteria andSeqLessThan(Integer value) {
+            addCriterion("seq <", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderLessThanOrEqualTo(Integer value) {
-            addCriterion("order <=", value, "order");
+        public Criteria andSeqLessThanOrEqualTo(Integer value) {
+            addCriterion("seq <=", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIn(List<Integer> values) {
-            addCriterion("order in", values, "order");
+        public Criteria andSeqIn(List<Integer> values) {
+            addCriterion("seq in", values, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotIn(List<Integer> values) {
-            addCriterion("order not in", values, "order");
+        public Criteria andSeqNotIn(List<Integer> values) {
+            addCriterion("seq not in", values, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderBetween(Integer value1, Integer value2) {
-            addCriterion("order between", value1, value2, "order");
+        public Criteria andSeqBetween(Integer value1, Integer value2) {
+            addCriterion("seq between", value1, value2, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotBetween(Integer value1, Integer value2) {
-            addCriterion("order not between", value1, value2, "order");
+        public Criteria andSeqNotBetween(Integer value1, Integer value2) {
+            addCriterion("seq not between", value1, value2, "seq");
             return (Criteria) this;
         }
 

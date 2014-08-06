@@ -6,9 +6,9 @@
 package com.dadaban.service.event;
 
 import com.dadaban.enums.StatusEnum;
-import com.dadaban.repository.dao.EventMapper;
-import com.dadaban.repository.model.Event;
-import com.dadaban.repository.model.EventExample;
+import com.dadaban.repository.dao.TicketMapper;
+import com.dadaban.repository.model.Ticket;
+import com.dadaban.repository.model.TicketExample;
 import com.dadaban.repository.util.CriteriaUtil;
 import com.dadaban.repository.util.Page;
 import com.dadaban.utils.DateUtils;
@@ -27,16 +27,16 @@ import java.util.Map;
 @Component
 // 类中所有public函数都纳入事务管理的标识.
 @Transactional
-public class EventService {
+public class TicketService {
 
     @Autowired
-	private EventMapper eventMapper;
+    private TicketMapper ticketMapper;
 
     private static final Logger logger = LoggerFactory.make();
 
-    public Page<Event> find(Page<Event> page, Map<String, Object> searchParams, String sortType) {
-        EventExample example = new EventExample();
-        EventExample countExample = new EventExample();
+    public Page<Ticket> find(Page<Ticket> page, Map<String, Object> searchParams, String sortType) {
+        TicketExample example = new TicketExample();
+        TicketExample countExample = new TicketExample();
 
         try {
             CriteriaUtil.buildCriteria(example, countExample, searchParams, page, sortType);
@@ -45,44 +45,44 @@ public class EventService {
         } catch (IllegalAccessException e) {
             logger.warn("buildCriteria error:", e);
         }
-        page.setContent(eventMapper.selectByExample(example));
-        page.setTotalRecords(eventMapper.countByExample(countExample));
+        page.setContent(ticketMapper.selectByExample(example));
+        page.setTotalRecords(ticketMapper.countByExample(countExample));
         return page;
     }
 
 
-    public int save(Event event) {
+    public int save(Ticket ticket) {
         Date now = DateUtils.getNow();
-        event.setStatus(StatusEnum.valid.getCode());
-        event.setCreatetime(now);
-        event.setUpdatetime(now);
-        return eventMapper.insert(event);
+        ticket.setStatus(StatusEnum.valid.getCode());
+        ticket.setCreatetime(now);
+        ticket.setUpdatetime(now);
+        return ticketMapper.insert(ticket);
     }
 
-    public int update(Event event) {
-        event.setUpdatetime(DateUtils.getNow());
-        return eventMapper.updateByPrimaryKeySelective(event);
+    public int update(Ticket ticket) {
+        ticket.setUpdatetime(DateUtils.getNow());
+        return ticketMapper.updateByPrimaryKeySelective(ticket);
     }
 
-    public Event get(Integer id) {
-        return eventMapper.selectByPrimaryKey(id);
+    public Ticket get(Integer id) {
+        return ticketMapper.selectByPrimaryKey(id);
     }
 
     public int delete(Integer id, Integer operatorId) {
-        Event event = eventMapper.selectByPrimaryKey(id);
-        if (ObjectUtil.isNotEmpty(event)) {
-            Event newEvent = new Event();
-            newEvent.setId(event.getId());
-            newEvent.setStatus(StatusEnum.invalid.getCode());
-            newEvent.setUpdatetime(DateUtils.getNow());
-            newEvent.setUpdateby(operatorId);
-            return eventMapper.updateByPrimaryKeySelective(newEvent);
+        Ticket ticket = ticketMapper.selectByPrimaryKey(id);
+        if (ObjectUtil.isNotEmpty(ticket)) {
+            Ticket newTicket = new Ticket();
+            newTicket.setId(ticket.getId());
+            newTicket.setStatus(StatusEnum.invalid.getCode());
+            newTicket.setUpdatetime(DateUtils.getNow());
+            newTicket.setUpdateby(operatorId);
+            return ticketMapper.updateByPrimaryKeySelective(newTicket);
         }
         return 0;
     }
 
     public int deleteForce(Integer id) {
-        return eventMapper.deleteByPrimaryKey(id);
+        return ticketMapper.deleteByPrimaryKey(id);
     }
 
 }

@@ -17,12 +17,12 @@
 	</appender>
 
 	<!-- project default level -->
-	<logger name="com.dadaban" level="INFO" />
+	<logger name="com.dadaban" level="DEBUG" />
 
 	<!--log4jdbc -->
-	<logger name="jdbc.sqltiming" level="INFO"/>
+	<logger name="jdbc.sqltiming" level="DEBUG"/>
 
-	<root level="INFO">
+	<root level="DEBUG">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>

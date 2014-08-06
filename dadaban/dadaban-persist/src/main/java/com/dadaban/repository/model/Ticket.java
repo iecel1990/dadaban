@@ -17,7 +17,7 @@ public class Ticket implements Serializable {
 
     private BigDecimal price;
 
-    private Integer order;
+    private Integer seq;
 
     private Date createtime;
 
@@ -79,12 +79,12 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSeq() {
+        return seq;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 
     public Date getCreatetime() {
@@ -139,7 +139,7 @@ public class Ticket implements Serializable {
         sb.append(", limitType=").append(limitType);
         sb.append(", limitNum=").append(limitNum);
         sb.append(", price=").append(price);
-        sb.append(", order=").append(order);
+        sb.append(", seq=").append(seq);
         sb.append(", createtime=").append(createtime);
         sb.append(", updatetime=").append(updatetime);
         sb.append(", createby=").append(createby);

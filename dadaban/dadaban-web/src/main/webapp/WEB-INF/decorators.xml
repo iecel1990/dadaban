@@ -5,7 +5,10 @@
 		<pattern>/api/*</pattern>
 	</excludes>
 	
-	<decorator name="default" page="default.jsp">
+	<decorator name="default" page="index/default.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+    <decorator name="login" page="login/default.jsp">
+        <pattern>/login*</pattern>
+    </decorator>
 </decorators>

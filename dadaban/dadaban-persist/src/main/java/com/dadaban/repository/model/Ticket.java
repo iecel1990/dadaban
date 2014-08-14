@@ -19,15 +19,33 @@ public class Ticket implements Serializable {
 
     private Integer seq;
 
-    private Date createtime;
+    private Integer eventId;
 
-    private Date updatetime;
+    private Date startTime;
+
+    private Date endTime;
+
+    private Date effStartTime;
+
+    private Date effEndTime;
+
+    private String remark;
+
+    private Integer status;
 
     private Integer createby;
 
     private Integer updateby;
 
-    private Integer status;
+    private Date createtime;
+
+    private Date updatetime;
+
+    private Integer minNum;
+
+    private Integer maxNum;
+
+    private Integer needAudit;
 
     private static final long serialVersionUID = 1L;
 
@@ -87,20 +105,60 @@ public class Ticket implements Serializable {
         this.seq = seq;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Date getEffStartTime() {
+        return effStartTime;
+    }
+
+    public void setEffStartTime(Date effStartTime) {
+        this.effStartTime = effStartTime;
+    }
+
+    public Date getEffEndTime() {
+        return effEndTime;
+    }
+
+    public void setEffEndTime(Date effEndTime) {
+        this.effEndTime = effEndTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getCreateby() {
@@ -119,12 +177,44 @@ public class Ticket implements Serializable {
         this.updateby = updateby;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public Integer getMinNum() {
+        return minNum;
+    }
+
+    public void setMinNum(Integer minNum) {
+        this.minNum = minNum;
+    }
+
+    public Integer getMaxNum() {
+        return maxNum;
+    }
+
+    public void setMaxNum(Integer maxNum) {
+        this.maxNum = maxNum;
+    }
+
+    public Integer getNeedAudit() {
+        return needAudit;
+    }
+
+    public void setNeedAudit(Integer needAudit) {
+        this.needAudit = needAudit;
     }
 
     @Override
@@ -140,11 +230,20 @@ public class Ticket implements Serializable {
         sb.append(", limitNum=").append(limitNum);
         sb.append(", price=").append(price);
         sb.append(", seq=").append(seq);
-        sb.append(", createtime=").append(createtime);
-        sb.append(", updatetime=").append(updatetime);
+        sb.append(", eventId=").append(eventId);
+        sb.append(", startTime=").append(startTime);
+        sb.append(", endTime=").append(endTime);
+        sb.append(", effStartTime=").append(effStartTime);
+        sb.append(", effEndTime=").append(effEndTime);
+        sb.append(", remark=").append(remark);
+        sb.append(", status=").append(status);
         sb.append(", createby=").append(createby);
         sb.append(", updateby=").append(updateby);
-        sb.append(", status=").append(status);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", updatetime=").append(updatetime);
+        sb.append(", minNum=").append(minNum);
+        sb.append(", maxNum=").append(maxNum);
+        sb.append(", needAudit=").append(needAudit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

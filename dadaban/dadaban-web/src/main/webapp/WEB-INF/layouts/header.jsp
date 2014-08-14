@@ -11,7 +11,7 @@
 					<i class="icon-user"></i> <shiro:principal property="name"/>
 					<span class="caret"></span>
 				</a>
-			
+
 				<ul class="dropdown-menu">
 					<shiro:hasRole name="admin">
 						<li><a href="${ctx}/admin/user">Admin Users</a></li>

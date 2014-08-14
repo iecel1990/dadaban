@@ -5,21 +5,36 @@
  *******************************************************************************/
 package com.dadaban.web.event;
 
+import com.dadaban.repository.model.Content;
 import com.dadaban.repository.model.Event;
+import com.dadaban.repository.model.Province;
+import com.dadaban.repository.model.Ticket;
 import com.dadaban.repository.util.Page;
 import com.dadaban.service.account.ShiroDbRealm.ShiroUser;
+import com.dadaban.service.content.ContentService;
 import com.dadaban.service.event.EventService;
+import com.dadaban.service.event.TicketService;
+import com.dadaban.service.province.ProvinceService;
+import com.dadaban.utils.ConfigUtil;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.modules.web.Servlets;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,6 +64,16 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private TicketService ticketService;
+
+    @Autowired
+    private ContentService contentService;
+
+    @Autowired
+    private ProvinceService provinceService;
+
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
@@ -75,17 +100,38 @@ public class EventController {
 		return "event/eventForm";
 	}
 
+    @RequestMapping(value = "upload", method = RequestMethod.GET)
+    public String upload() {
+        return "event/upload";
+    }
+
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Event event, RedirectAttributes redirectAttributes) {
+	public String create( @RequestParam(value = "editorValue", defaultValue = "") String editorValue, @Valid Event event,RedirectAttributes redirectAttributes) {
         eventService.save(event);
+        Content content = new Content();
+        content.setContent(editorValue);
+        content.setEventId(event.getId());
+        content.setName("活动内容");
+        contentService.save(content);
 		redirectAttributes.addFlashAttribute("message", "创建成功");
-		return "redirect:/event/";
+        String url = "redirect:/event/update/" + event.getId() + "?tab=" + 1;
+        return url;
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("event", eventService.get(id));
+	public String updateForm(@PathVariable("id") Integer id, @RequestParam(value = "tab", defaultValue = "0") String tab, Model model) {
+
+        Event event = eventService.get(id);
+        List<Ticket> tickets = ticketService.findTickets(id);
+        List<Content> contents = contentService.findContents(id);
+        List<Province> provinces = provinceService.findAll();
+
+        model.addAttribute("event", event);
 		model.addAttribute("action", "update");
+        model.addAttribute("content", CollectionUtils.isNotEmpty(contents) ? contents.get(0) : null);
+        model.addAttribute("tickets", tickets);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("tab", tab);
 		return "event/eventForm";
 	}
 
@@ -104,6 +150,19 @@ public class EventController {
 		return "redirect:/event/";
 	}
 
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Integer id, Model model) {
+        Event event = eventService.get(id);
+        List<Ticket> tickets = ticketService.findTickets(id);
+        List<Content> contents = contentService.findContents(id);
+
+        model.addAttribute("event", event);
+        model.addAttribute("tickets", tickets);
+        model.addAttribute("contents", contents);
+
+        model.addAttribute("action", "update");
+        return "event/eventShow";
+    }
 
 	@ModelAttribute
 	public void getEvent(@RequestParam(value = "id", defaultValue = "-1") Integer id, Model model) {
@@ -112,6 +171,7 @@ public class EventController {
 		}
 	}
 
+
 	/**
 	 * 取出Shiro中的当前用户Id.
 	 */
@@ -119,4 +179,10 @@ public class EventController {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return Integer.parseInt(user.id.toString());
 	}
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 }

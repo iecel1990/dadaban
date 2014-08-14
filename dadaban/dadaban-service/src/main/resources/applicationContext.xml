@@ -59,7 +59,12 @@
 
 	<!-- JSR303 Validator定义 -->
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
+
+
+    <import resource="applicationContext-mybatis.xml"></import>
+    <import resource="applicationContext-shiro.xml"></import>
+    <import resource="general/applicationContext-general.xml"></import>
+
 	<!-- production环境 -->
  	<beans profile="production">
  		<context:property-placeholder ignore-unresolvable="true"
@@ -141,9 +146,5 @@
 			<jdbc:script location="classpath:sql/h2/schema.sql" />
 			<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>
 		</jdbc:initialize-database>
-        <import resource="classpath*:applicationContext.xml"/>
-        <!--
-        <import resource="classpath*:applicationContext-mybatis.xml"/>
-        -->
 	</beans>
 </beans>

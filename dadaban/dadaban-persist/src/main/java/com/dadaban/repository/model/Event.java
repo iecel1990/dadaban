@@ -10,9 +10,9 @@ public class Event implements Serializable {
 
     private Integer categoryId;
 
-    private String starttime;
+    private Date starttime;
 
-    private String endtime;
+    private Date endtime;
 
     private Integer limitNum;
 
@@ -62,20 +62,20 @@ public class Event implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public String getStarttime() {
+    public Date getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(String starttime) {
-        this.starttime = starttime == null ? null : starttime.trim();
+    public void setStarttime(Date starttime) {
+        this.starttime = starttime;
     }
 
-    public String getEndtime() {
+    public Date getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(String endtime) {
-        this.endtime = endtime == null ? null : endtime.trim();
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
     }
 
     public Integer getLimitNum() {

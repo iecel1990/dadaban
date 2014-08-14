@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 // Spring Bean的标识.
@@ -49,7 +50,6 @@ public class EventService {
         page.setTotalRecords(eventMapper.countByExample(countExample));
         return page;
     }
-
 
     public int save(Event event) {
         Date now = DateUtils.getNow();

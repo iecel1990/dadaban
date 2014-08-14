@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 // Spring Bean的标识.
@@ -48,6 +49,12 @@ public class TicketService {
         page.setContent(ticketMapper.selectByExample(example));
         page.setTotalRecords(ticketMapper.countByExample(countExample));
         return page;
+    }
+
+    public List<Ticket> findTickets(Integer eventId) {
+        TicketExample example = new TicketExample();
+        example.createCriteria().andEventIdEqualTo(eventId);
+        return ticketMapper.selectByExample(example);
     }
 
 

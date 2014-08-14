@@ -5,8 +5,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="category_id" property="categoryId" jdbcType="INTEGER" />
-    <result column="starttime" property="starttime" jdbcType="VARCHAR" />
-    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
     <result column="limit_num" property="limitNum" jdbcType="INTEGER" />
     <result column="faction" property="faction" jdbcType="INTEGER" />
     <result column="province" property="province" jdbcType="INTEGER" />
@@ -124,8 +124,8 @@
       tags, createtime, updatetime, 
       createby, updateby, status
       )
-    values (#{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{starttime,jdbcType=VARCHAR}, 
-      #{endtime,jdbcType=VARCHAR}, #{limitNum,jdbcType=INTEGER}, #{faction,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{limitNum,jdbcType=INTEGER}, #{faction,jdbcType=INTEGER}, 
       #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
       #{createby,jdbcType=INTEGER}, #{updateby,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
@@ -191,10 +191,10 @@
         #{categoryId,jdbcType=INTEGER},
       </if>
       <if test="starttime != null" >
-        #{starttime,jdbcType=VARCHAR},
+        #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="endtime != null" >
-        #{endtime,jdbcType=VARCHAR},
+        #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="limitNum != null" >
         #{limitNum,jdbcType=INTEGER},
@@ -250,10 +250,10 @@
         category_id = #{record.categoryId,jdbcType=INTEGER},
       </if>
       <if test="record.starttime != null" >
-        starttime = #{record.starttime,jdbcType=VARCHAR},
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endtime != null" >
-        endtime = #{record.endtime,jdbcType=VARCHAR},
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.limitNum != null" >
         limit_num = #{record.limitNum,jdbcType=INTEGER},
@@ -298,8 +298,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
-      starttime = #{record.starttime,jdbcType=VARCHAR},
-      endtime = #{record.endtime,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
       limit_num = #{record.limitNum,jdbcType=INTEGER},
       faction = #{record.faction,jdbcType=INTEGER},
       province = #{record.province,jdbcType=INTEGER},
@@ -325,10 +325,10 @@
         category_id = #{categoryId,jdbcType=INTEGER},
       </if>
       <if test="starttime != null" >
-        starttime = #{starttime,jdbcType=VARCHAR},
+        starttime = #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="endtime != null" >
-        endtime = #{endtime,jdbcType=VARCHAR},
+        endtime = #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="limitNum != null" >
         limit_num = #{limitNum,jdbcType=INTEGER},
@@ -370,8 +370,8 @@
     update event
     set name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
-      starttime = #{starttime,jdbcType=VARCHAR},
-      endtime = #{endtime,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
       limit_num = #{limitNum,jdbcType=INTEGER},
       faction = #{faction,jdbcType=INTEGER},
       province = #{province,jdbcType=INTEGER},

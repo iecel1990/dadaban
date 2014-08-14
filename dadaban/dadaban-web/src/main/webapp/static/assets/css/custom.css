@@ -1,0 +1,21 @@
+/* here you can put your own css to customize and override the theme */
+/* here you can put your own css to customize and override the theme */
+.ticketModal{
+    width: 680px;
+}
+.ticket {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 24%;
+}
+.ticket h4{
+    margin-top : 0px;
+    margin-bottom: 0px;
+}
+.ticket div.row {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.ticket .row div.col-md-4{
+    text-align: right;
+}

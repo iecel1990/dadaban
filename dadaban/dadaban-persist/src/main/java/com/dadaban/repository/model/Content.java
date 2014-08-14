@@ -8,9 +8,9 @@ public class Content implements Serializable {
 
     private String name;
 
-    private Integer order;
+    private Integer seq;
 
-    private Integer eId;
+    private Integer eventId;
 
     private Date createtime;
 
@@ -42,20 +42,20 @@ public class Content implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSeq() {
+        return seq;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 
-    public Integer geteId() {
-        return eId;
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void seteId(Integer eId) {
-        this.eId = eId;
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 
     public Date getCreatetime() {
@@ -114,8 +114,8 @@ public class Content implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", order=").append(order);
-        sb.append(", eId=").append(eId);
+        sb.append(", seq=").append(seq);
+        sb.append(", eventId=").append(eventId);
         sb.append(", createtime=").append(createtime);
         sb.append(", updatetime=").append(updatetime);
         sb.append(", createby=").append(createby);

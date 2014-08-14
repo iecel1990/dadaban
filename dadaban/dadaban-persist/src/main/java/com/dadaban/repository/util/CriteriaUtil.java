@@ -37,6 +37,9 @@ public class CriteriaUtil {
 
     public static void buildCriteria(Object example, Object countExample, Map<String, Object> searchParams, Page page, String sortType, boolean isValidStatus) throws InvocationTargetException, IllegalAccessException {
 
+        if (ObjectUtil.isEmpty(searchParams)) {
+            return;
+        }
         Map<String, Object> methodParams = Maps.newHashMapWithExpectedSize(searchParams.size());
 
         for (Map.Entry<String, Object> entry : searchParams.entrySet()) {

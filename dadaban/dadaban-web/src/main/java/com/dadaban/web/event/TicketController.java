@@ -12,14 +12,19 @@ import com.dadaban.service.event.TicketService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.modules.web.Servlets;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -76,10 +81,10 @@ public class TicketController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(@Valid Ticket ticket, RedirectAttributes redirectAttributes) {
+    @ResponseBody
+    public Ticket create(@Valid Ticket ticket, RedirectAttributes redirectAttributes) {
         ticketService.save(ticket);
-        redirectAttributes.addFlashAttribute("message", "创建成功");
-        return "redirect:/ticket/";
+        return ticket;
     }
 
     @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
@@ -118,5 +123,11 @@ public class TicketController {
     private Integer getCurrentUserId() {
         ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         return Integer.parseInt(user.id.toString());
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 }

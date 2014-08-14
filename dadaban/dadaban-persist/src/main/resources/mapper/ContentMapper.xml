@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.dadaban.repository.model.Content" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="order" property="order" jdbcType="INTEGER" />
-    <result column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="event_id" property="eventId" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="createby" property="createby" jdbcType="INTEGER" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, order, e_id, createtime, updatetime, createby, updateby, status
+    id, name, seq, event_id, createtime, updatetime, createby, updateby, status
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -134,11 +134,11 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into content (name, order, e_id, 
+    insert into content (name, seq, event_id, 
       createtime, updatetime, createby, 
       updateby, status, content
       )
-    values (#{name,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{eventId,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{createby,jdbcType=INTEGER}, 
       #{updateby,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
@@ -152,11 +152,11 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="order != null" >
-        order,
+      <if test="seq != null" >
+        seq,
       </if>
-      <if test="eId != null" >
-        e_id,
+      <if test="eventId != null" >
+        event_id,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -181,11 +181,11 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="order != null" >
-        #{order,jdbcType=INTEGER},
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
       </if>
-      <if test="eId != null" >
-        #{eId,jdbcType=INTEGER},
+      <if test="eventId != null" >
+        #{eventId,jdbcType=INTEGER},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -222,11 +222,11 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.order != null" >
-        order = #{record.order,jdbcType=INTEGER},
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=INTEGER},
       </if>
-      <if test="record.eId != null" >
-        e_id = #{record.eId,jdbcType=INTEGER},
+      <if test="record.eventId != null" >
+        event_id = #{record.eventId,jdbcType=INTEGER},
       </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -255,8 +255,8 @@
     update content
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      order = #{record.order,jdbcType=INTEGER},
-      e_id = #{record.eId,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      event_id = #{record.eventId,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
       createby = #{record.createby,jdbcType=INTEGER},
@@ -271,8 +271,8 @@
     update content
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      order = #{record.order,jdbcType=INTEGER},
-      e_id = #{record.eId,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      event_id = #{record.eventId,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
       createby = #{record.createby,jdbcType=INTEGER},
@@ -288,11 +288,11 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="order != null" >
-        order = #{order,jdbcType=INTEGER},
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
       </if>
-      <if test="eId != null" >
-        e_id = #{eId,jdbcType=INTEGER},
+      <if test="eventId != null" >
+        event_id = #{eventId,jdbcType=INTEGER},
       </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -318,8 +318,8 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dadaban.repository.model.Content" >
     update content
     set name = #{name,jdbcType=VARCHAR},
-      order = #{order,jdbcType=INTEGER},
-      e_id = #{eId,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      event_id = #{eventId,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
       createby = #{createby,jdbcType=INTEGER},
@@ -331,8 +331,8 @@
   <update id="updateByPrimaryKey" parameterType="com.dadaban.repository.model.Content" >
     update content
     set name = #{name,jdbcType=VARCHAR},
-      order = #{order,jdbcType=INTEGER},
-      e_id = #{eId,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      event_id = #{eventId,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
       createby = #{createby,jdbcType=INTEGER},

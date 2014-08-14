@@ -18,11 +18,11 @@ public class FmGenerator {
 
 
         Map<String,Object> root = new HashMap<String, Object>();
-        root.put("UpBeanName", "Ticket");
-        root.put("beanName", "ticket");
+        root.put("UpBeanName", "Files");
+        root.put("beanName", "files");
 
-        generator(root, "/controller.ftl");
 //        generator(root, "/service.ftl");
+        generator(root, "/controller.ftl");
     }
 
 

@@ -1,9 +1,13 @@
 package com.dadaban.utils;
 
 
+import com.dadaban.enums.Constants;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by jrose on 14-6-9.
@@ -53,6 +57,14 @@ public class ObjectUtil {
         throw new RuntimeException("系统异常");
     }
 
+    public static String getTimeDir () {
+        StringBuffer sb = new StringBuffer();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        sb.append(localDateTime.getYear()).append(Constants.DIR_SEPARATOR)
+                .append(localDateTime.getMonthValue()).append(Constants.DIR_SEPARATOR)
+                .append(localDateTime.getDayOfMonth()).append(Constants.DIR_SEPARATOR);
+        return sb.toString();
+    }
     public static boolean notHasEmpty(Object... objects) {
         return !hasEmpty(objects);
     }

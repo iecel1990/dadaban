@@ -3,7 +3,7 @@
 <mapper namespace="com.dadaban.repository.dao.CategoryMapper" >
   <resultMap id="BaseResultMap" type="com.dadaban.repository.model.Category" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
@@ -112,7 +112,7 @@
     insert into category (name, parent_id, createtime, 
       updatetime, createby, updateby, 
       status)
-    values (#{name,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{createby,jdbcType=INTEGER}, #{updateby,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER})
   </insert>
@@ -146,7 +146,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="name != null" >
-        #{name,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
@@ -181,7 +181,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
-        name = #{record.name,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.parentId != null" >
         parent_id = #{record.parentId,jdbcType=INTEGER},
@@ -209,7 +209,7 @@
   <update id="updateByExample" parameterType="map" >
     update category
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
       parent_id = #{record.parentId,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
@@ -224,7 +224,7 @@
     update category
     <set >
       <if test="name != null" >
-        name = #{name,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
@@ -249,7 +249,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dadaban.repository.model.Category" >
     update category
-    set name = #{name,jdbcType=INTEGER},
+    set name = #{name,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},

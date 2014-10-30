@@ -5,17 +5,18 @@
  *******************************************************************************/
 package com.dadaban.web.event;
 
-import com.dadaban.repository.model.Content;
-import com.dadaban.repository.model.Event;
-import com.dadaban.repository.model.Province;
-import com.dadaban.repository.model.Ticket;
+import com.dadaban.repository.model.*;
 import com.dadaban.repository.util.Page;
 import com.dadaban.service.account.ShiroDbRealm.ShiroUser;
 import com.dadaban.service.content.ContentService;
+import com.dadaban.service.event.EventAttaService;
 import com.dadaban.service.event.EventService;
 import com.dadaban.service.event.TicketService;
+import com.dadaban.service.files.FilesService;
 import com.dadaban.service.province.ProvinceService;
 import com.dadaban.utils.ConfigUtil;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,9 +34,7 @@ import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Event管理的Controller, 使用Restful风格的Urls:
@@ -73,6 +72,11 @@ public class EventController {
     @Autowired
     private ProvinceService provinceService;
 
+    @Autowired
+    private EventAttaService eventAttaService;
+
+    @Autowired
+    private FilesService filesService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
@@ -155,10 +159,19 @@ public class EventController {
         Event event = eventService.get(id);
         List<Ticket> tickets = ticketService.findTickets(id);
         List<Content> contents = contentService.findContents(id);
+        List<EventAtta> eventAttas = eventAttaService.findByEventId(id);
 
+        Collection<Integer> integerCollection = Collections2.transform(eventAttas, new Function<EventAtta, Integer>() {
+            @Override
+            public Integer apply(EventAtta input) {
+                return input.getAttaId();
+            }
+        });
+        List<Files> focusImgs = filesService.findByAttaIds(new ArrayList<>(integerCollection));
         model.addAttribute("event", event);
         model.addAttribute("tickets", tickets);
         model.addAttribute("contents", contents);
+        model.addAttribute("focusImgs", focusImgs);
 
         model.addAttribute("action", "update");
         return "event/eventShow";

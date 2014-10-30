@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>${event.name}</title>
-
+    <link href="${ctx}/static/assets/css/pages/gallery.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <!-- BEGIN PAGE CONTAINER -->
@@ -40,24 +40,14 @@
         <div id="myCarousel" class="carousel slide">
             <!-- Carousel items -->
             <div class="carousel-inner">
-                <div class="active item">
-                    <img src="${ctx}/static/assets/img/works/img1.jpg" alt="">
-                    <div class="carousel-caption">
-                        <p>Excepturi sint occaecati cupiditate non provident</p>
+                <c:forEach items="${focusImgs}" var="focusImg" varStatus="status">
+                    <div class="item ${status.index eq 0 ? 'active' : ''}">
+                        <img src="${ctx}/${focusImg.filePath}${focusImg.fileName}" style="width: 462px;height:346px;">
+                        <div class="carousel-caption">
+                            <p>Excepturi sint occaecati cupiditate non provident</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img src="${ctx}/static/assets/img/works/img2.jpg" alt="">
-                    <div class="carousel-caption">
-                        <p>Ducimus qui blanditiis praesentium voluptatum</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="${ctx}/static/assets/img/works/img3.jpg" alt="">
-                    <div class="carousel-caption">
-                        <p>Ut non libero consectetur adipiscing elit magna</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
             <!-- Carousel nav -->
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">

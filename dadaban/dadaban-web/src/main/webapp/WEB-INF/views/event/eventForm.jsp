@@ -8,6 +8,7 @@
     <link href="${ctx}/static/assets/plugins/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
     <link href="${ctx}/static/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/assets/plugins/datatimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="${ctx}/static/assets/plugins/jquery-fileupload/css/jquery.fileupload.css">
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/assets/plugins/umeditor/umeditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/assets/plugins/umeditor/umeditor.min.js"></script>
@@ -44,7 +45,7 @@
 <ul class="nav nav-tabs" id="eventTab">
     <li class="active"><a href="#tab-1" data-toggle="tab">基本信息</a></li>
     <li><a href="#tab-2" data-toggle="tab">票务信息</a></li>
-    <li><a href="#tab-3" data-toggle="tab">Responsive</a></li>
+    <li><a href="#tab-3" data-toggle="tab">上传海报</a></li>
 </ul>
 <div class="tab-content">
 <div class="tab-pane row fade in active" id="tab-1">
@@ -57,7 +58,7 @@
                         <div class="form-group">
                             <label  class="col-md-3 control-label">活动名称</label>
                             <div class="col-md-9">
-                                <input type="hidden" name="id" value="${event.id}"/>
+                                <input type="hidden" name="id" id="eventId" value="${event.id}"/>
                                 <input type="text" class="form-control input-large" name="name" value="${event.name}" placeholder="爱运动才是好姑娘">
                             </div>
                         </div>
@@ -312,7 +313,24 @@
     </div>
 </div>
 <div class="tab-pane fade" id="tab-3">
-    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+    <div class="col-md-10">
+        <div class="row">
+            <span class="btn btn-success fileinput-button" id="uploadPanel">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>上传海报</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input id="fileupload" type="file" name="file">
+                </span>
+        </div>
+        <!-- The container for the uploaded files -->
+        <div id="files" class="files row"></div>
+        <div class="row">
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 </div>
@@ -331,6 +349,21 @@
     });
 
 </script>
+<script src="${ctx}/static/assets/plugins/jquery-fileupload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="${ctx}/static/assets/plugins/load-image/load-image.all.min.js"></script>
+<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="${ctx}/static/assets/plugins/jquery-fileupload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="${ctx}/static/assets/plugins/jquery-fileupload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="${ctx}/static/assets/plugins/jquery-fileupload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="${ctx}/static/assets/plugins/jquery-fileupload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+
 <script src="${ctx}/static/assets/plugins/angular/angular.min.js"></script>
 <script src="${ctx}/static/assets/plugins/datatimepicker/js/moment.js"></script>
 <script src="${ctx}/static/assets/plugins/datatimepicker/js/bootstrap-datetimepicker.js"></script>

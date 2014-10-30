@@ -9,6 +9,7 @@ import com.dadaban.repository.model.Files;
 import com.dadaban.repository.util.Page;
 import com.dadaban.service.account.ShiroDbRealm.ShiroUser;
 import com.dadaban.service.files.FilesService;
+import com.dadaban.utils.Assert;
 import com.dadaban.utils.ConfigUtil;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
@@ -80,8 +81,9 @@ public class FilesController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     @ResponseBody
-    public Files create(@RequestParam("file") CommonsMultipartFile file, RedirectAttributes redirectAttributes) {
-        Files files = filesService.save(file, getCurrentUserId());
+    public Files create(@RequestParam("file") CommonsMultipartFile file,@RequestParam(value = "eventId") Integer eventId, RedirectAttributes redirectAttributes) {
+        Assert.checkNotNull(eventId, "不能为空");
+        Files files = filesService.save(file, getCurrentUserId(), eventId);
         return files;
     }
 

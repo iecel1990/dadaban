@@ -19,3 +19,11 @@
 .ticket .row div.col-md-4{
     text-align: right;
 }
+
+.event-item .row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.event-item .name {
+    height: 36px;
+}

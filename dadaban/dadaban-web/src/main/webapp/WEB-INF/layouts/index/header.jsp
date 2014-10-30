@@ -37,7 +37,7 @@
             <!-- END RESPONSIVE MENU TOGGLER -->
             <!-- BEGIN LOGO (you can use logo image instead of text)-->
             <a class="navbar-brand logo-v1" href="${ctx}/index">
-                <img src="${ctx}/static/assets/img/ddb_logo1.png" id="logoimg" alt="" width="135px" height="38px">
+                <img src="${ctx}/static/assets/img/ddb_logo.png" id="logoimg" alt="" width="135px" height="38px">
             </a>
             <!-- END LOGO -->
         </div>
@@ -46,7 +46,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav dropdown-menu-righ">
                 <li class="active"><a href="/" target="_blank">首页</a></li>
-                <li><a href="/" target="_blank">搭伴</a></li>
+                <li><a href="${ctx}/event">搭伴</a></li>
                 <li><a href="/" target="_blank">帮派</a></li>
                 <li><a href="/" target="_blank">约TA</a></li>
                 <li class="dropdown">

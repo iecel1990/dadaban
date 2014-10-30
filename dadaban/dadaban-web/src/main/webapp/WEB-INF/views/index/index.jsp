@@ -250,11 +250,11 @@
     <!-- BEGIN FILTER -->
     <div class="filter-v1 margin-top-10">
         <ul class="mix-filter">
-            <li class="filter" data-filter="all">All</li>
-            <li class="filter" data-filter="category_1">UI Design</li>
-            <li class="filter" data-filter="category_2">Web Development</li>
-            <li class="filter" data-filter="category_3">Photography</li>
-            <li class="filter" data-filter="category_3 category_1">Wordpress and Logo</li>
+            <li class="filter" data-filter="all">全部</li>
+            <li class="filter" data-filter="category_1">羽毛球<li>
+            <li class="filter" data-filter="category_2">乒乓球</li>
+            <li class="filter" data-filter="category_3">骑行</li>
+            <li class="filter" data-filter="category_3 category_1">跑步</li>
         </ul>
         <div class="row mix-grid thumbnails">
             <div class="col-md-4 col-sm-6 mix category_1">

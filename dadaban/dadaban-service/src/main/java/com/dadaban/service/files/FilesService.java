@@ -5,14 +5,17 @@
  *******************************************************************************/
 package com.dadaban.service.files;
 
+import com.dadaban.enums.AttaFileType;
 import com.dadaban.enums.Constants;
 import com.dadaban.enums.FileType;
 import com.dadaban.enums.StatusEnum;
 import com.dadaban.repository.dao.FilesMapper;
+import com.dadaban.repository.model.EventAtta;
 import com.dadaban.repository.model.Files;
 import com.dadaban.repository.model.FilesExample;
 import com.dadaban.repository.util.CriteriaUtil;
 import com.dadaban.repository.util.Page;
+import com.dadaban.service.event.EventAttaService;
 import com.dadaban.utils.ConfigUtil;
 import com.dadaban.utils.DateUtils;
 import com.dadaban.utils.LoggerFactory;
@@ -27,6 +30,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,6 +42,9 @@ public class FilesService {
 
     @Autowired
     private FilesMapper filesMapper;
+
+    @Autowired
+    private EventAttaService eventAttaService;
 
     private static final Logger logger = LoggerFactory.make();
 
@@ -57,6 +64,12 @@ public class FilesService {
         return page;
     }
 
+    public List<Files> findByAttaIds(List<Integer> attaIds) {
+        FilesExample example = new FilesExample();
+
+        example.createCriteria().andIdIn(attaIds).andStatusEqualTo(StatusEnum.valid.getCode());
+        return filesMapper.selectByExample(example);
+    }
 
     public int save(Files files) {
         Date now = DateUtils.getNow();
@@ -67,7 +80,7 @@ public class FilesService {
     }
 
 
-    public Files save(CommonsMultipartFile file, Integer userId) {
+    public Files save(CommonsMultipartFile file, Integer userId, Integer eventId) {
         String fileName = file.getFileItem().getName();
 
         String suffix = com.google.common.io.Files.getFileExtension(file.getFileItem().getName());
@@ -94,10 +107,26 @@ public class FilesService {
             files.setStatus(StatusEnum.valid.getCode());
             files.setUpdateby(userId);
             files.setUpdatetime(DateUtils.getNow());
-            filesMapper.insert(files);
-            return files.getId() > 0  ? files : null;
+            int filesResult = filesMapper.insert(files);
+            if (filesResult > 0) {
+                saveEventAtta(userId, files.getId(), eventId);
+                return files;
+            }
         }
         return null;
+    }
+
+    private void saveEventAtta(Integer userId, int filesId, Integer eventId) {
+            EventAtta eventAtta = new EventAtta();
+            eventAtta.setUpdateby(userId);
+            eventAtta.setCreateby(userId);
+            eventAtta.setCreatetime(DateUtils.getNow());
+            eventAtta.setUpdatetime(DateUtils.getNow());
+            eventAtta.setStatus(StatusEnum.valid.getCode());
+            eventAtta.setType(AttaFileType.FOCUS_IMG);
+            eventAtta.setEventId(eventId);
+            eventAtta.setAttaId(filesId);
+            eventAttaService.save(eventAtta);
     }
 
     private String getFileName(String suffix) {
